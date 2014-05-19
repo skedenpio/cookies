@@ -61,6 +61,20 @@ public class Roberto extends HttpServlet
 		}
 		return dati;
 	}
+	
+	public static String checkData(String name, String name2, HttpServletResponse response,Map<String,String> dati)
+	{
+		if (name == null || name.trim().isEmpty())
+		{
+			return dati.get(name2);
+		}
+		else
+		{
+			Cookie biscotto = new Cookie(name2,name);
+			response.addCookie(biscotto);
+			return name;
+		}
+	}
 
 	/**
 	 * @see HttpServlet #doGet(HttpServletRequest request, HttpServletResponse response)
@@ -71,34 +85,11 @@ public class Roberto extends HttpServlet
 		String surname = request.getParameter("surname");
 		String email = request.getParameter("email");
 		Map<String,String> dati = new HashMap<String,String>();
+		
 		dati = caricaDati(request);
-		if (name == null || name.equals(""))
-		{
-			name = dati.get("name");
-		}
-		else
-		{
-			Cookie biscotto = new Cookie("name",name);
-			response.addCookie(biscotto);
-		}
-		if (surname == null || surname.equals(""))
-		{
-			surname = dati.get("surname");
-		}
-		else
-		{
-			Cookie biscotto2 = new Cookie("surname",surname);
-			response.addCookie(biscotto2);
-		}
-		if (email == null || email.equals(""))
-		{
-			email = dati.get("email");
-		}
-		else
-		{
-			Cookie biscotto3 = new Cookie("email",email);
-			response.addCookie(biscotto3);
-		} 
+		name = checkData(name,"name",response,dati);
+		surname = checkData(surname,"surname",response,dati);
+		email = checkData(email,"email",response,dati);
 		
 		PrintWriter out = response.getWriter();
 		out.println(html(name,surname,email).toString());
