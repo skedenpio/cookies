@@ -23,17 +23,26 @@ public class Roberto extends HttpServlet
 	public StringBuilder html(String name, String surname, String email)
 	{
 		StringBuilder html = new StringBuilder();
-		html.append("<!doctype html><html>");
-		html.append("<head><title>Roberto</title></head>");
-		html.append("<body><h1>Dati personali</h1>");
-		html.append("<p><ul><li>");
+		html.append("<!DOCTYPE html>"
+		html.append("<html>");
+		html.append("<head>");
+		html.append("<title>Roberto</title>");
+		html.append("</head>");
+		html.append("<body>");
+		html.append("<h1>Dati personali</h1>");
+		html.append("<ul>");
+		html.append("<li>");
 		html.append(name);
 		html.append("</li>");
-		html.append("<li>" + surname);
+		html.append("<li>");
+		html.append(surname);
 		html.append("</li>");
-		html.append("<li>" + email);
-		html.append("</li></ul></p>");
-		html.append("</body></html>");
+		html.append("<li>");
+		html.append(email);
+		html.append("</li>");
+		html.append("</ul>");
+		html.append("</body>");
+		html.append("</html>");
 		return html;
 	}
 	
@@ -79,7 +88,8 @@ public class Roberto extends HttpServlet
 	/**
 	 * @see HttpServlet #doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	      throws ServletException, IOException 
 	{
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -94,13 +104,6 @@ public class Roberto extends HttpServlet
 		PrintWriter out = response.getWriter();
 		out.println(html(name,surname,email).toString());
 		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
